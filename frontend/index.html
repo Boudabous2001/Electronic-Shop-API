@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏪 Electronic Shop - Gestion Multi-Boutiques</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">🏪 Electronic Shop</div>
+        <nav id="nav-menu">
+            <a href="#" onclick="showSection('home')">Accueil</a>
+            <a href="#" onclick="showSection('public')">Catalogue Public</a>
+            <a href="#" onclick="showSection('login')" id="login-link">Connexion</a>
+            <a href="#" onclick="showSection('dashboard')" id="dashboard-link" style="display:none;">Dashboard</a>
+            <a href="#" onclick="logout()" id="logout-link" style="display:none;">Déconnexion</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Section Accueil -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>🏪 Electronic Shop Management</h1>
+                <p>Système de gestion multi-boutiques d'électronique</p>
+                <div class="hero-buttons">
+                    <button onclick="showSection('public')" class="btn btn-primary">Voir le Catalogue</button>
+                    <button onclick="showSection('login')" class="btn btn-secondary">Se Connecter</button>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <span class="icon">🔐</span>
+                    <h3>Multi-tenant Sécurisé</h3>
+                    <p>Isolation complète des données entre boutiques</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">👥</span>
+                    <h3>Gestion des Rôles</h3>
+                    <p>SuperAdmin et Admin avec permissions différentes</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📱</span>
+                    <h3>WhatsApp Intégré</h3>
+                    <p>Redirection automatique vers WhatsApp</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📊</span>
+                    <h3>Dashboard Complet</h3>
+                    <p>Statistiques et rapports en temps réel</p>
+                </div>
+            </div>
+
+            <div class="team-section">
+                <h2>👨‍💻 Équipe de Développement</h2>
+                <div class="team-members">
+                    <div class="member">Boudabous Elyes</div>
+                    <div class="member">Yasmine Aoudjit</div>
+                    <div class="member">Mohamed Amine Dhaoui</div>
+                    <div class="member">Mohamed Amine Ourraki</div>
+                </div>
+                <p class="instructor">Encadrant : <strong>Mr. Mounir Aziz</strong></p>
+            </div>
+        </section>
+
+        <!-- Section Login -->
+        <section id="login" class="section">
+            <div class="form-container">
+                <h2>🔐 Connexion</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="login-email" required placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Se Connecter</button>
+                </form>
+                <p class="form-footer">Pas de compte ? <a href="#" onclick="showSection('register')">S'inscrire</a></p>
+                <div id="login-message" class="message"></div>
+            </div>
+        </section>
+
+        <!-- Section Register -->
+        <section id="register" class="section">
+            <div class="form-container">
+                <h2>📝 Créer un Compte</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label>Nom complet</label>
+                        <input type="text" id="reg-name" required placeholder="Votre nom">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="reg-email" required placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" id="reg-password" required placeholder="Min. 6 caractères">
+                    </div>
+                    <div class="form-group">
+                        <label>Rôle</label>
+                        <select id="reg-role" required>
+                            <option value="SuperAdmin">SuperAdmin</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nom du Shop</label>
+                        <input type="text" id="reg-shop" required placeholder="Ma Boutique">
+                    </div>
+                    <div class="form-group">
+                        <label>Numéro WhatsApp</label>
+                        <input type="text" id="reg-whatsapp" required placeholder="212612345678">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Créer le Compte</button>
+                </form>
+                <p class="form-footer">Déjà un compte ? <a href="#" onclick="showSection('login')">Se connecter</a></p>
+                <div id="register-message" class="message"></div>
+            </div>
+        </section>
+
+        <!-- Section Public (Catalogue) -->
+        <section id="public" class="section">
+            <h2>🛍️ Catalogue Public</h2>
+            <p>Choisissez une boutique pour voir ses produits</p>
+
+            <div id="shops-list" class="shops-grid">
+                <!-- Shops chargés dynamiquement -->
+            </div>
+
+            <div id="public-products" class="products-grid" style="display:none;">
+                <!-- Produits chargés dynamiquement -->
+            </div>
+        </section>
+
+        <!-- Section Dashboard -->
+        <section id="dashboard" class="section">
+            <div class="dashboard-header">
+                <h2>📊 Dashboard</h2>
+                <span id="user-info"></span>
+            </div>
+
+            <!-- Stats Cards -->
+            <div id="stats-cards" class="stats-grid">
+                <!-- Stats chargées dynamiquement -->
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('products-tab')">📦 Produits</button>
+                <button class="tab" onclick="showTab('transactions-tab')">💰 Transactions</button>
+                <button class="tab" onclick="showTab('users-tab')" id="users-tab-btn">👥 Utilisateurs</button>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="products-tab" class="tab-content active">
+                <div class="tab-header">
+                    <h3>📦 Gestion des Produits</h3>
+                    <button class="btn btn-primary" onclick="showAddProductModal()">+ Ajouter</button>
+                </div>
+                <div id="products-list" class="table-container">
+                    <!-- Tableau des produits -->
+                </div>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div id="transactions-tab" class="tab-content">
+                <div class="tab-header">
+                    <h3>💰 Transactions</h3>
+                    <button class="btn btn-primary" onclick="showAddTransactionModal()">+ Nouvelle</button>
+                </div>
+                <div id="transactions-list" class="table-container">
+                    <!-- Tableau des transactions -->
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="users-tab" class="tab-content">
+                <div class="tab-header">
+                    <h3>👥 Utilisateurs</h3>
+                    <button class="btn btn-primary" onclick="showAddUserModal()">+ Ajouter</button>
+                </div>
+                <div id="users-list" class="table-container">
+                    <!-- Tableau des utilisateurs -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Ajouter Produit -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('product-modal')">&times;</span>
+            <h3>📦 Ajouter un Produit</h3>
+            <form id="product-form">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" id="prod-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="prod-desc"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <input type="text" id="prod-category">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Prix d'achat</label>
+                        <input type="number" id="prod-purchase" required min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Prix de vente</label>
+                        <input type="number" id="prod-selling" required min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Stock</label>
+                    <input type="number" id="prod-stock" required min="0">
+                </div>
+                <div class="form-group">
+                    <label>URL Image</label>
+                    <input type="text" id="prod-image">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Transaction -->
+    <div id="transaction-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('transaction-modal')">&times;</span>
+            <h3>💰 Nouvelle Transaction</h3>
+            <form id="transaction-form">
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="trans-type" required onchange="toggleProductField()">
+                        <option value="Sale">Vente</option>
+                        <option value="Expense">Dépense</option>
+                        <option value="Withdrawal">Retrait</option>
+                    </select>
+                </div>
+                <div class="form-group" id="product-field">
+                    <label>Produit</label>
+                    <select id="trans-product"></select>
+                </div>
+                <div class="form-group" id="quantity-field">
+                    <label>Quantité</label>
+                    <input type="number" id="trans-quantity" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label>Montant</label>
+                    <input type="number" id="trans-amount" required min="0" step="0.01">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal User -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('user-modal')">&times;</span>
+            <h3>👤 Ajouter un Utilisateur</h3>
+            <form id="user-form">
+                <div class="form-group">
+                    <label>Nom</label>
+                    <input type="text" id="user-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="user-email" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="user-password" required>
+                </div>
+                <div class="form-group">
+                    <label>Rôle</label>
+                    <select id="user-role" required>
+                        <option value="Admin">Admin</option>
+                        <option value="SuperAdmin">SuperAdmin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Créer</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>🏪 Electronic Shop API - Bootcamp Go 2024</p>
+        <p>Équipe : Boudabous Elyes, Yasmine Aoudjit, Mohamed Amine Dhaoui, Mohamed Amine Ourraki</p>
+        <p>Encadrant : Mr. Mounir Aziz</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
