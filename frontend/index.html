@@ -4,286 +4,570 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏪 Electronic Shop - Gestion Multi-Boutiques</title>
+    <title>Electronic Shop - Gestion Multi-Boutiques</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">🏪 Electronic Shop</div>
-        <nav id="nav-menu">
-            <a href="#" onclick="showSection('home')">Accueil</a>
-            <a href="#" onclick="showSection('public')">Catalogue Public</a>
-            <a href="#" onclick="showSection('login')" id="login-link">Connexion</a>
-            <a href="#" onclick="showSection('dashboard')" id="dashboard-link" style="display:none;">Dashboard</a>
-            <a href="#" onclick="logout()" id="logout-link" style="display:none;">Déconnexion</a>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Section Accueil -->
-        <section id="home" class="section active">
-            <div class="hero">
-                <h1>🏪 Electronic Shop Management</h1>
-                <p>Système de gestion multi-boutiques d'électronique</p>
-                <div class="hero-buttons">
-                    <button onclick="showSection('public')" class="btn btn-primary">Voir le Catalogue</button>
-                    <button onclick="showSection('login')" class="btn btn-secondary">Se Connecter</button>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">E</div>
+                    <span>ElectroShop</span>
                 </div>
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h18M3 6h18M3 18h18" />
+                    </svg>
+                </button>
             </div>
 
-            <div class="features">
-                <div class="feature-card">
-                    <span class="icon">🔐</span>
-                    <h3>Multi-tenant Sécurisé</h3>
-                    <p>Isolation complète des données entre boutiques</p>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-section-title">Menu</span>
+                    <a href="#" class="nav-link active" onclick="showSection('home')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9,22 9,12 15,12 15,22" />
+                        </svg>
+                        <span>Accueil</span>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showSection('public')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="9" cy="21" r="1" />
+                            <circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                        </svg>
+                        <span>Catalogue</span>
+                    </a>
                 </div>
-                <div class="feature-card">
-                    <span class="icon">👥</span>
-                    <h3>Gestion des Rôles</h3>
-                    <p>SuperAdmin et Admin avec permissions différentes</p>
-                </div>
-                <div class="feature-card">
-                    <span class="icon">📱</span>
-                    <h3>WhatsApp Intégré</h3>
-                    <p>Redirection automatique vers WhatsApp</p>
-                </div>
-                <div class="feature-card">
-                    <span class="icon">📊</span>
-                    <h3>Dashboard Complet</h3>
-                    <p>Statistiques et rapports en temps réel</p>
-                </div>
-            </div>
 
-            <div class="team-section">
-                <h2>👨‍💻 Équipe de Développement</h2>
-                <div class="team-members">
-                    <div class="member">Boudabous Elyes</div>
-                    <div class="member">Yasmine Aoudjit</div>
-                    <div class="member">Mohamed Amine Dhaoui</div>
-                    <div class="member">Mohamed Amine Ourraki</div>
+                <div class="nav-section" id="auth-nav">
+                    <span class="nav-section-title">Compte</span>
+                    <a href="#" class="nav-link" onclick="showSection('login')" id="login-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                            <polyline points="10,17 15,12 10,7" />
+                            <line x1="15" y1="12" x2="3" y2="12" />
+                        </svg>
+                        <span>Connexion</span>
+                    </a>
+                    <a href="#" class="nav-link" onclick="showSection('dashboard')" id="dashboard-link"
+                        style="display:none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="7" height="9" />
+                            <rect x="14" y="3" width="7" height="5" />
+                            <rect x="14" y="12" width="7" height="9" />
+                            <rect x="3" y="16" width="7" height="5" />
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-link" onclick="logout()" id="logout-link" style="display:none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16,17 21,12 16,7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        <span>Déconnexion</span>
+                    </a>
                 </div>
-                <p class="instructor">Encadrant : <strong>Mr. Mounir Aziz</strong></p>
-            </div>
-        </section>
+            </nav>
 
-        <!-- Section Login -->
-        <section id="login" class="section">
-            <div class="form-container">
-                <h2>🔐 Connexion</h2>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="login-email" required placeholder="votre@email.com">
+            <div class="sidebar-footer">
+                <div class="user-card" id="user-card" style="display:none;">
+                    <div class="user-avatar" id="user-avatar">A</div>
+                    <div class="user-info">
+                        <span class="user-name" id="user-name">Admin</span>
+                        <span class="user-role" id="user-role">SuperAdmin</span>
                     </div>
-                    <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" id="login-password" required placeholder="••••••••">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Se Connecter</button>
-                </form>
-                <p class="form-footer">Pas de compte ? <a href="#" onclick="showSection('register')">S'inscrire</a></p>
-                <div id="login-message" class="message"></div>
-            </div>
-        </section>
-
-        <!-- Section Register -->
-        <section id="register" class="section">
-            <div class="form-container">
-                <h2>📝 Créer un Compte</h2>
-                <form id="register-form">
-                    <div class="form-group">
-                        <label>Nom complet</label>
-                        <input type="text" id="reg-name" required placeholder="Votre nom">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="reg-email" required placeholder="votre@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" id="reg-password" required placeholder="Min. 6 caractères">
-                    </div>
-                    <div class="form-group">
-                        <label>Rôle</label>
-                        <select id="reg-role" required>
-                            <option value="SuperAdmin">SuperAdmin</option>
-                            <option value="Admin">Admin</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Nom du Shop</label>
-                        <input type="text" id="reg-shop" required placeholder="Ma Boutique">
-                    </div>
-                    <div class="form-group">
-                        <label>Numéro WhatsApp</label>
-                        <input type="text" id="reg-whatsapp" required placeholder="212612345678">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Créer le Compte</button>
-                </form>
-                <p class="form-footer">Déjà un compte ? <a href="#" onclick="showSection('login')">Se connecter</a></p>
-                <div id="register-message" class="message"></div>
-            </div>
-        </section>
-
-        <!-- Section Public (Catalogue) -->
-        <section id="public" class="section">
-            <h2>🛍️ Catalogue Public</h2>
-            <p>Choisissez une boutique pour voir ses produits</p>
-
-            <div id="shops-list" class="shops-grid">
-                <!-- Shops chargés dynamiquement -->
-            </div>
-
-            <div id="public-products" class="products-grid" style="display:none;">
-                <!-- Produits chargés dynamiquement -->
-            </div>
-        </section>
-
-        <!-- Section Dashboard -->
-        <section id="dashboard" class="section">
-            <div class="dashboard-header">
-                <h2>📊 Dashboard</h2>
-                <span id="user-info"></span>
-            </div>
-
-            <!-- Stats Cards -->
-            <div id="stats-cards" class="stats-grid">
-                <!-- Stats chargées dynamiquement -->
-            </div>
-
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('products-tab')">📦 Produits</button>
-                <button class="tab" onclick="showTab('transactions-tab')">💰 Transactions</button>
-                <button class="tab" onclick="showTab('users-tab')" id="users-tab-btn">👥 Utilisateurs</button>
-            </div>
-
-            <!-- Products Tab -->
-            <div id="products-tab" class="tab-content active">
-                <div class="tab-header">
-                    <h3>📦 Gestion des Produits</h3>
-                    <button class="btn btn-primary" onclick="showAddProductModal()">+ Ajouter</button>
-                </div>
-                <div id="products-list" class="table-container">
-                    <!-- Tableau des produits -->
                 </div>
             </div>
+        </aside>
 
-            <!-- Transactions Tab -->
-            <div id="transactions-tab" class="tab-content">
-                <div class="tab-header">
-                    <h3>💰 Transactions</h3>
-                    <button class="btn btn-primary" onclick="showAddTransactionModal()">+ Nouvelle</button>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Section Accueil -->
+            <section id="home" class="section active">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <span class="hero-badge">Bootcamp Go 2024</span>
+                        <h1>Gestion Multi-Boutiques<br><span>Électronique</span></h1>
+                        <p>Plateforme complète de gestion pour boutiques d'électronique avec isolation des données,
+                            gestion des rôles et intégration WhatsApp.</p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary btn-lg" onclick="showSection('public')">
+                                Explorer le catalogue
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                            <button class="btn btn-outline btn-lg" onclick="showSection('login')">
+                                Se connecter
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="hero-card hero-card-1">
+                            <div class="card-icon">📱</div>
+                            <span>+500 Produits</span>
+                        </div>
+                        <div class="hero-card hero-card-2">
+                            <div class="card-icon">🏪</div>
+                            <span>Multi-Boutiques</span>
+                        </div>
+                        <div class="hero-card hero-card-3">
+                            <div class="card-icon">💬</div>
+                            <span>WhatsApp Intégré</span>
+                        </div>
+                    </div>
                 </div>
-                <div id="transactions-list" class="table-container">
-                    <!-- Tableau des transactions -->
-                </div>
-            </div>
 
-            <!-- Users Tab -->
-            <div id="users-tab" class="tab-content">
-                <div class="tab-header">
-                    <h3>👥 Utilisateurs</h3>
-                    <button class="btn btn-primary" onclick="showAddUserModal()">+ Ajouter</button>
+                <div class="features-section">
+                    <div class="section-header">
+                        <h2>Fonctionnalités Principales</h2>
+                        <p>Une solution complète pour gérer votre boutique</p>
+                    </div>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </div>
+                            <h3>Sécurité Multi-tenant</h3>
+                            <p>Isolation complète des données entre chaque boutique avec authentification JWT.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </div>
+                            <h3>Gestion des Rôles</h3>
+                            <p>SuperAdmin et Admin avec des permissions différentes et contrôlées.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23" />
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
+                            </div>
+                            <h3>Dashboard Financier</h3>
+                            <p>Suivi des ventes, dépenses et profits en temps réel.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                                </svg>
+                            </div>
+                            <h3>WhatsApp Direct</h3>
+                            <p>Vos clients vous contactent directement via WhatsApp en un clic.</p>
+                        </div>
+                    </div>
                 </div>
-                <div id="users-list" class="table-container">
-                    <!-- Tableau des utilisateurs -->
-                </div>
-            </div>
-        </section>
-    </main>
 
-    <!-- Modal Ajouter Produit -->
-    <div id="product-modal" class="modal">
+                <div class="team-section">
+                    <div class="section-header">
+                        <h2>Notre Équipe</h2>
+                        <p>Développeurs du projet</p>
+                    </div>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-avatar">BE</div>
+                            <span class="member-name">Boudabous Elyes</span>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">YA</div>
+                            <span class="member-name">Yasmine Aoudjit</span>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">MD</div>
+                            <span class="member-name">Mohamed Amine Dhaoui</span>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">MO</div>
+                            <span class="member-name">Mohamed Amine Ourraki</span>
+                        </div>
+                    </div>
+                    <div class="instructor-badge">
+                        <span>Encadrant</span>
+                        <strong>Mr. Mounir Aziz</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Login -->
+            <section id="login" class="section">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <div class="auth-header">
+                            <h2>Connexion</h2>
+                            <p>Accédez à votre espace de gestion</p>
+                        </div>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-email">Email</label>
+                                <div class="input-wrapper">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                        <polyline points="22,6 12,13 2,6" />
+                                    </svg>
+                                    <input type="email" id="login-email" placeholder="votre@email.com" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Mot de passe</label>
+                                <div class="input-wrapper">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                    </svg>
+                                    <input type="password" id="login-password" placeholder="••••••••" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">
+                                Se connecter
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </form>
+                        <div class="auth-footer">
+                            <p>Pas encore de compte ? <a href="#" onclick="showSection('register')">S'inscrire</a></p>
+                        </div>
+                        <div id="login-message" class="message"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Register -->
+            <section id="register" class="section">
+                <div class="auth-container">
+                    <div class="auth-card auth-card-lg">
+                        <div class="auth-header">
+                            <h2>Créer un compte</h2>
+                            <p>Créez votre boutique en quelques clics</p>
+                        </div>
+                        <form id="register-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-name">Nom complet</label>
+                                    <input type="text" id="reg-name" placeholder="Votre nom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-email">Email</label>
+                                    <input type="email" id="reg-email" placeholder="votre@email.com" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-password">Mot de passe</label>
+                                    <input type="password" id="reg-password" placeholder="Min. 6 caractères" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-role">Rôle</label>
+                                    <select id="reg-role" required>
+                                        <option value="SuperAdmin">SuperAdmin</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="reg-shop">Nom de la boutique</label>
+                                    <input type="text" id="reg-shop" placeholder="Ma Boutique" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reg-whatsapp">WhatsApp</label>
+                                    <input type="text" id="reg-whatsapp" placeholder="212612345678" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">
+                                Créer mon compte
+                            </button>
+                        </form>
+                        <div class="auth-footer">
+                            <p>Déjà un compte ? <a href="#" onclick="showSection('login')">Se connecter</a></p>
+                        </div>
+                        <div id="register-message" class="message"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Public Catalogue -->
+            <section id="public" class="section">
+                <div class="page-header">
+                    <h1>Catalogue Public</h1>
+                    <p>Découvrez les produits de nos boutiques partenaires</p>
+                </div>
+
+                <div id="shops-list" class="shops-grid"></div>
+
+                <div id="public-products" style="display:none;">
+                    <button class="btn btn-outline back-btn" onclick="backToShops()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                        Retour aux boutiques
+                    </button>
+                    <div id="shop-info" class="shop-info"></div>
+                    <div id="products-grid" class="products-grid"></div>
+                </div>
+            </section>
+
+            <!-- Section Dashboard -->
+            <section id="dashboard" class="section">
+                <div class="page-header">
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p id="dashboard-welcome">Bienvenue dans votre espace de gestion</p>
+                    </div>
+                    <div id="dashboard-user-badge" class="user-badge"></div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div id="stats-grid" class="stats-grid"></div>
+
+                <!-- Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="products-tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                            </svg>
+                            Produits
+                        </button>
+                        <button class="tab" data-tab="transactions-tab">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                            Transactions
+                        </button>
+                        <button class="tab" data-tab="users-tab" id="users-tab-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                            Utilisateurs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Contents -->
+                <div class="tab-content active" id="products-tab">
+                    <div class="content-header">
+                        <h3>Gestion des Produits</h3>
+                        <button class="btn btn-primary" onclick="showModal('product-modal')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            Ajouter un produit
+                        </button>
+                    </div>
+                    <div id="products-table" class="table-wrapper"></div>
+                </div>
+
+                <div class="tab-content" id="transactions-tab">
+                    <div class="content-header">
+                        <h3>Historique des Transactions</h3>
+                        <button class="btn btn-primary" onclick="showModal('transaction-modal')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            Nouvelle transaction
+                        </button>
+                    </div>
+                    <div id="transactions-table" class="table-wrapper"></div>
+                </div>
+
+                <div class="tab-content" id="users-tab">
+                    <div class="content-header">
+                        <h3>Gestion des Utilisateurs</h3>
+                        <button class="btn btn-primary" onclick="showModal('user-modal')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            Ajouter un utilisateur
+                        </button>
+                    </div>
+                    <div id="users-table" class="table-wrapper"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal: Add Product -->
+    <div class="modal" id="product-modal">
+        <div class="modal-overlay" onclick="closeModal('product-modal')"></div>
         <div class="modal-content">
-            <span class="close" onclick="closeModal('product-modal')">&times;</span>
-            <h3>📦 Ajouter un Produit</h3>
+            <div class="modal-header">
+                <h3>Ajouter un produit</h3>
+                <button class="modal-close" onclick="closeModal('product-modal')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
             <form id="product-form">
                 <div class="form-group">
-                    <label>Nom</label>
-                    <input type="text" id="prod-name" required>
+                    <label>Nom du produit</label>
+                    <input type="text" id="prod-name" required placeholder="iPhone 14 Pro">
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea id="prod-desc"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Catégorie</label>
-                    <input type="text" id="prod-category">
+                    <textarea id="prod-desc" rows="3" placeholder="Description du produit..."></textarea>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Prix d'achat</label>
-                        <input type="number" id="prod-purchase" required min="0" step="0.01">
+                        <label>Catégorie</label>
+                        <select id="prod-category">
+                            <option value="Smartphones">Smartphones</option>
+                            <option value="Laptops">Laptops</option>
+                            <option value="Tablets">Tablets</option>
+                            <option value="Accessoires">Accessoires</option>
+                            <option value="Audio">Audio</option>
+                            <option value="Gaming">Gaming</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>Prix de vente</label>
-                        <input type="number" id="prod-selling" required min="0" step="0.01">
+                        <label>Stock</label>
+                        <input type="number" id="prod-stock" required min="0" value="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Prix d'achat (DH)</label>
+                        <input type="number" id="prod-purchase" required min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Prix de vente (DH)</label>
+                        <input type="number" id="prod-selling" required min="0" step="0.01" placeholder="0.00">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Stock</label>
-                    <input type="number" id="prod-stock" required min="0">
+                    <label>URL de l'image (optionnel)</label>
+                    <input type="url" id="prod-image" placeholder="https://...">
                 </div>
-                <div class="form-group">
-                    <label>URL Image</label>
-                    <input type="text" id="prod-image">
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('product-modal')">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </div>
-                <button type="submit" class="btn btn-primary btn-full">Enregistrer</button>
             </form>
         </div>
     </div>
 
-    <!-- Modal Transaction -->
-    <div id="transaction-modal" class="modal">
+    <!-- Modal: Add Transaction -->
+    <div class="modal" id="transaction-modal">
+        <div class="modal-overlay" onclick="closeModal('transaction-modal')"></div>
         <div class="modal-content">
-            <span class="close" onclick="closeModal('transaction-modal')">&times;</span>
-            <h3>💰 Nouvelle Transaction</h3>
+            <div class="modal-header">
+                <h3>Nouvelle transaction</h3>
+                <button class="modal-close" onclick="closeModal('transaction-modal')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
             <form id="transaction-form">
                 <div class="form-group">
-                    <label>Type</label>
-                    <select id="trans-type" required onchange="toggleProductField()">
+                    <label>Type de transaction</label>
+                    <select id="trans-type" required onchange="toggleTransactionFields()">
                         <option value="Sale">Vente</option>
                         <option value="Expense">Dépense</option>
                         <option value="Withdrawal">Retrait</option>
                     </select>
                 </div>
-                <div class="form-group" id="product-field">
-                    <label>Produit</label>
-                    <select id="trans-product"></select>
-                </div>
-                <div class="form-group" id="quantity-field">
-                    <label>Quantité</label>
-                    <input type="number" id="trans-quantity" min="1" value="1">
+                <div id="sale-fields">
+                    <div class="form-group">
+                        <label>Produit</label>
+                        <select id="trans-product"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantité</label>
+                        <input type="number" id="trans-quantity" min="1" value="1">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>Montant</label>
-                    <input type="number" id="trans-amount" required min="0" step="0.01">
+                    <label>Montant (DH)</label>
+                    <input type="number" id="trans-amount" required min="0" step="0.01" placeholder="0.00">
                 </div>
-                <button type="submit" class="btn btn-primary btn-full">Enregistrer</button>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline"
+                        onclick="closeModal('transaction-modal')">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- Modal User -->
-    <div id="user-modal" class="modal">
+    <!-- Modal: Add User -->
+    <div class="modal" id="user-modal">
+        <div class="modal-overlay" onclick="closeModal('user-modal')"></div>
         <div class="modal-content">
-            <span class="close" onclick="closeModal('user-modal')">&times;</span>
-            <h3>👤 Ajouter un Utilisateur</h3>
+            <div class="modal-header">
+                <h3>Ajouter un utilisateur</h3>
+                <button class="modal-close" onclick="closeModal('user-modal')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
             <form id="user-form">
                 <div class="form-group">
-                    <label>Nom</label>
-                    <input type="text" id="user-name" required>
+                    <label>Nom complet</label>
+                    <input type="text" id="user-name" required placeholder="Nom complet">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="user-email" required>
+                    <input type="email" id="user-email" required placeholder="email@exemple.com">
                 </div>
                 <div class="form-group">
                     <label>Mot de passe</label>
-                    <input type="password" id="user-password" required>
+                    <input type="password" id="user-password" required placeholder="Min. 6 caractères">
                 </div>
                 <div class="form-group">
                     <label>Rôle</label>
@@ -292,16 +576,16 @@
                         <option value="SuperAdmin">SuperAdmin</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-full">Créer</button>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('user-modal')">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <footer>
-        <p>🏪 Electronic Shop API - Bootcamp Go 2024</p>
-        <p>Équipe : Boudabous Elyes, Yasmine Aoudjit, Mohamed Amine Dhaoui, Mohamed Amine Ourraki</p>
-        <p>Encadrant : Mr. Mounir Aziz</p>
-    </footer>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
 
     <script src="app.js"></script>
 </body>
