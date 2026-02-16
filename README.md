@@ -14,6 +14,7 @@ API Backend en Go + Frontend pour la gestion multi-boutiques d'électronique ave
 | **Yasmine Aoudjit** | Développeuse Frontend & Documentation |
 | **Mohamed Amine Dhaoui** | Développeur Full-Stack |
 | **Mohamed Amine Ourraki** | Développeur Full-Stack |
+| **Nour-eddine BAHI** | Développeur Full-Stack |
 
 **Encadrant** : Mr. Mounir Aziz
 
@@ -245,3 +246,4 @@ Projet éducatif - Bootcamp Go 2024
 
 
 Merci à **Mr. Mounir Aziz** pour son encadrement tout au long de ce bootcamp.
+
