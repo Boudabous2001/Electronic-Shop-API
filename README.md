@@ -41,10 +41,10 @@ API Backend en Go + Frontend pour la gestion multi-boutiques d'électronique ave
 ### Option 1 : Avec Docker (Recommandé) ✅
 ```bash
 # 1. Cloner le repository
-git clone https://github.com/votre-repo/electronic-shop-api.git
+git clone https://github.com/Boudabous2001/Electronic-Shop-API.git
 
 # 2. Entrer dans le dossier
-cd electronic-shop-api
+cd Electronic-Shop-API
 
 # 3. Lancer avec Docker Compose
 docker-compose up --build
@@ -57,10 +57,10 @@ docker-compose up --build
 ### Option 2 : Sans Docker
 ```bash
 # 1. Cloner le repository
-git clone https://github.com/votre-repo/electronic-shop-api.git
+git clone https://github.com/Boudabous2001/Electronic-Shop-API.git
 
 # 2. Entrer dans le dossier
-cd electronic-shop-api
+cd Electronic-Shop-API
 
 # 3. Installer les dépendances Go
 go mod download
@@ -242,5 +242,6 @@ Projet éducatif - Bootcamp Go 2024
 ---
 
 ## 🙏 Remerciements
+
 
 Merci à **Mr. Mounir Aziz** pour son encadrement tout au long de ce bootcamp.
